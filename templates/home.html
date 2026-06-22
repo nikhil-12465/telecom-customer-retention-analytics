@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecom Customer Retention Analytics</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <script defer
+            src="{{ url_for('static', filename='script.js') }}">
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HERO -->
+
+    <section class="hero-card">
+
+        <h1>Telecom Customer Retention Analytics</h1>
+
+        <p>
+            Predict customer churn risk using machine learning
+            and customer behavior analytics.
+        </p>
+
+        <p class="hint">
+            Fields marked with * have the highest impact on churn prediction.
+        </p>
+
+    </section>
+
+    <!-- FORM -->
+
+    <section class="main-card">
+
+        <h2>Critical Customer Factors</h2>
+
+        <form method="POST"
+              action="/"
+              id="predictionForm">
+
+            <!-- Hidden Total Charges -->
+
+            <input type="hidden"
+                   id="totalCharges"
+                   name="query3">
+
+            <div class="grid">
+
+                <!-- CONTRACT -->
+
+                <div class="field">
+                    <label>Contract Type *</label>
+
+                    <select name="query16" required>
+
+                        <option value="">Select Contract</option>
+
+                        <option value="Month-to-month"
+                        {% if query16=="Month-to-month" %}selected{% endif %}>
+                            Month-to-month
+                        </option>
+
+                        <option value="One year"
+                        {% if query16=="One year" %}selected{% endif %}>
+                            One year
+                        </option>
+
+                        <option value="Two year"
+                        {% if query16=="Two year" %}selected{% endif %}>
+                            Two year
+                        </option>
+
+                    </select>
+                </div>
+
+                <!-- INTERNET -->
+
+                <div class="field">
+                    <label>Internet Service *</label>
+
+                    <select name="query9" required>
+
+                        <option value="">Select Service</option>
+
+                        <option value="DSL"
+                        {% if query9=="DSL" %}selected{% endif %}>
+                            DSL
+                        </option>
+
+                        <option value="Fiber optic"
+                        {% if query9=="Fiber optic" %}selected{% endif %}>
+                            Fiber optic
+                        </option>
+
+                        <option value="No"
+                        {% if query9=="No" %}selected{% endif %}>
+                            No
+                        </option>
+
+                    </select>
+                </div>
+
+                <!-- ONLINE SECURITY -->
+
+                <div class="field">
+                    <label>Online Security *</label>
+
+                    <select name="query10" required>
+
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No internet service">
+                            No internet service
+                        </option>
+
+                    </select>
+                </div>
+
+                <!-- ONLINE BACKUP -->
+
+                <div class="field">
+                    <label>Online Backup *</label>
+
+                    <select name="query11" required>
+
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No internet service">
+                            No internet service
+                        </option>
+
+                    </select>
+                </div>
+
+                <!-- TECH SUPPORT -->
+
+                <div class="field">
+                    <label>Tech Support *</label>
+
+                    <select name="query13" required>
+
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No internet service">
+                            No internet service
+                        </option>
+
+                    </select>
+                </div>
+
+                <!-- DEVICE PROTECTION -->
+
+                <div class="field">
+                    <label>Device Protection *</label>
+
+                    <select name="query12" required>
+
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No internet service">
+                            No internet service
+                        </option>
+
+                    </select>
+                </div>
+
+                <!-- MONTHLY -->
+
+                <div class="field">
+                    <label>Monthly Charges *</label>
+
+                    <input type="number"
+                           step="0.01"
+                           id="monthlyCharges"
+                           name="query2"
+                           required
+                           value="{{ query2 }}">
+                </div>
+
+                <!-- TENURE -->
+
+                <div class="field">
+                    <label>Tenure (Months) *</label>
+
+                    <input type="number"
+                           min="1"
+                           max="72"
+                           id="tenure"
+                           name="query19"
+                           required
+                           value="{{ query19 }}">
+                </div>
+
+                <!-- PAYMENT -->
+
+                <div class="field">
+                    <label>Payment Method *</label>
+
+                    <select name="query18" required>
+
+                        <option value="Electronic check">
+                            Electronic check
+                        </option>
+
+                        <option value="Mailed check">
+                            Mailed check
+                        </option>
+
+                        <option value="Bank transfer (automatic)">
+                            Bank transfer (automatic)
+                        </option>
+
+                        <option value="Credit card (automatic)">
+                            Credit card (automatic)
+                        </option>
+
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- ADVANCED -->
+
+            <details class="advanced-section">
+
+                <summary>
+                    Advanced Customer Details
+                </summary>
+
+                <div class="grid advanced-grid">
+
+                    <div class="field">
+                        <label>Gender</label>
+
+                        <select name="query4">
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Partner</label>
+
+                        <select name="query5">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Dependents</label>
+
+                        <select name="query6">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Phone Service</label>
+
+                        <select name="query7">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Multiple Lines</label>
+
+                        <select name="query8">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No phone service">
+                                No phone service
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Streaming TV</label>
+
+                        <select name="query14">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No internet service">
+                                No internet service
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Streaming Movies</label>
+
+                        <select name="query15">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No internet service">
+                                No internet service
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Paperless Billing</label>
+
+                        <select name="query17">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Senior Citizen</label>
+
+                        <select name="query1">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </details>
+
+            <button type="submit"
+                    id="predictBtn"
+                    class="predict-btn">
+                Predict Customer Risk
+            </button>
+
+            <div id="loading">
+                Analyzing customer profile...
+            </div>
+
+        </form>
+
+    </section>
+
+    {% if output1 %}
+
+    <section class="result-card {{ risk_class }}">
+
+        <h2>{{ risk }}</h2>
+
+        <h3>{{ output1 }}</h3>
+
+        <p>{{ output2 }}</p>
+
+        <div class="progress-container">
+
+            <div class="progress-bar"
+                 style="width: {{ churn_probability }}%;">
+            </div>
+
+        </div>
+
+    </section>
+
+    {% endif %}
+
+    <footer>
+        Built with Flask • Random Forest • SMOTEENN
+    </footer>
+
+</div>
+
+</body>
+</html>
